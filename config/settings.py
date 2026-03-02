@@ -7,8 +7,8 @@ class DCConfig:
     dc_id: str = "DC-001"
     dc_name: str = "Northeast Distribution Center"
     total_dock_doors: int = 50
-    inbound_doors: List[int] = field(default_factory=lambda: list(range(1, 21)))   # doors 1-20
-    outbound_doors: List[int] = field(default_factory=lambda: list(range(21, 51)))  # doors 21-50
+    inbound_doors: List[int] = field(default_factory=lambda: list(range(1, 21)))
+    outbound_doors: List[int] = field(default_factory=lambda: list(range(21, 51)))
     shifts: List[str] = field(default_factory=lambda: ["1st", "2nd", "3rd"])
 
     baseline_shrinkage_rates: Dict[str, float] = field(default_factory=lambda: {
@@ -23,10 +23,10 @@ class DCConfig:
     history_days: int = 365
     num_trailers: int = 80
 
-    shrinkage_alert_threshold: float = 0.025    # 2.5%
-    shrinkage_critical_threshold: float = 0.05  # 5%
+    shrinkage_alert_threshold: float = 0.025
+    shrinkage_critical_threshold: float = 0.05
     misdirect_alert_threshold: int = 3
-    audit_risk_threshold: float = 0.7           # 0-1 scale
+    audit_risk_threshold: float = 0.7
 
     random_seed: int = 42
 
@@ -46,5 +46,15 @@ class AgentConfig:
     )
 
 
+@dataclass
+class GeminiConfig:
+    model_name: str = "gemini-2.5-flash" #"gemini-2.5-flash"
+    temperature: float = 0.3
+    max_output_tokens: int = 2048
+    max_prompt_items: int = 10  # cap items sent in prompts to control token usage
+
+
 DC_CONFIG = DCConfig()
 AGENT_CONFIG = AgentConfig()
+GEMINI_CONFIG = GeminiConfig()
+
